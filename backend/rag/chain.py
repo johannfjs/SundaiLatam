@@ -33,8 +33,8 @@ def build_rag_chain():
     )
 
     prompt = ChatPromptTemplate.from_messages([
-        ("system", SYSTEM_PROMPT + "\n\n" + ROUTINE_FORMAT_INSTRUCTIONS),
-        ("human", """User Profile:
+        SystemMessage(content=SYSTEM_PROMPT + "\n\n" + ROUTINE_FORMAT_INSTRUCTIONS),
+        HumanMessagePromptTemplate.from_template("""User Profile:
 - Goal: {goal}
 - Fitness Level: {fitness_level}
 - Available Equipment: {equipment}

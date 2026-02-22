@@ -7,6 +7,12 @@ interface ChatInputProps {
   isStreaming: boolean
 }
 
+const GOAL_OPTIONS = [
+  { value: 'hypertrophy', label: 'Hypertrophy' },
+  { value: 'strength', label: 'Strength' },
+  { value: 'olympic weightlifting', label: 'Olympic Weightlifting' },
+]
+
 const EQUIPMENT_OPTIONS = [
   'Barbell', 'Dumbbells', 'Cable machine', 'Smith machine',
   'Pull-up bar', 'Resistance bands', 'Kettlebells', 'Bodyweight only',
