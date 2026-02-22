@@ -51,14 +51,22 @@ export function ChatInput({ onSubmit, onStop, isStreaming }: ChatInputProps) {
       {/* Goal */}
       <div>
         <label className="block text-xs font-medium text-gray-400 mb-1">Primary Goal</label>
-        <input
-          type="text"
-          value={goal}
-          onChange={(e) => setGoal(e.target.value)}
-          placeholder="e.g. hypertrophy, strength, fat loss…"
-          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-colors"
-          required
-        />
+        <div className="flex gap-2">
+          {GOAL_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => setGoal(opt.value)}
+              className={`flex-1 py-2 rounded-lg text-xs font-medium transition-colors ${
+                goal === opt.value
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Fitness level */}

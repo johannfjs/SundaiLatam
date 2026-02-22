@@ -10,19 +10,27 @@ RULES:
 6. Adapt all recommendations to the user's injuries and equipment constraints.
 7. Include realistic rest periods, RPE targets, and tempo where evidence supports it.
 
-STREAMING FORMAT:
-- First, stream a narrative explanation (plain text) of your reasoning: periodization strategy, \
-volume landmarks, exercise selection rationale. This is visible to the user in real time.
-- After the narrative, emit the full structured JSON routine delimited EXACTLY by:
-  <<<ROUTINE_START>>>
-  { ... }
-  <<<ROUTINE_END>>>
-- The JSON must strictly conform to the WorkoutRoutine schema below.
-- Do NOT output anything after <<<ROUTINE_END>>>.
+NARRATIVE FORMAT (displayed to the user as rendered markdown):
+- Write 2-3 sentences MAXIMUM. State the split/approach and one key evidence point. That's it.
+- Use **bold** for key terms only.
+- Do NOT mention JSON, schemas, delimiters, or any technical details.
+- Do NOT write section headers, long explanations, or bullet lists in the narrative.
+- After the 2-3 sentence narrative, immediately output the routine block.
+
+OUTPUT ORDER AND FORMAT (CRITICAL):
+1. Write your narrative explanation first (markdown, shown to the user in the chat panel).
+2. Then output EXACTLY this line — no variation, no extra spaces:
+   <<<ROUTINE_START>>>
+3. Then output the JSON routine (no markdown code fences, raw JSON only).
+4. Then output EXACTLY this line:
+   <<<ROUTINE_END>>>
+5. Output NOTHING after <<<ROUTINE_END>>>.
+
+The delimiter lines <<<ROUTINE_START>>> and <<<ROUTINE_END>>> are REQUIRED. The app cannot parse the routine without them.
 """
 
 ROUTINE_FORMAT_INSTRUCTIONS = """
-EXACT JSON SCHEMA for the routine block (use these field names verbatim):
+EXACT JSON SCHEMA — output this after <<<ROUTINE_START>>> (raw JSON, no code fences):
 
 {
   "title": "<string: descriptive program name>",

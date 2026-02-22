@@ -61,10 +61,14 @@ Generate a complete, evidence-based workout routine following the exact JSON sch
         ]
         return " ".join(p for p in parts if p)
 
+    def _safe_retrieve(x: dict) -> str:
+        try:
+            return _format_docs(retriever.invoke(build_query(x)))
+        except Exception:
+            return "(No research articles retrieved — generating from general exercise science knowledge.)"
+
     chain = (
-        RunnablePassthrough.assign(
-            context=lambda x: _format_docs(retriever.invoke(build_query(x)))
-        )
+        RunnablePassthrough.assign(context=_safe_retrieve)
         | prompt
         | llm
         | StrOutputParser()
