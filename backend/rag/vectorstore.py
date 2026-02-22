@@ -21,7 +21,11 @@ def get_embeddings() -> OpenAIEmbeddings:
 @lru_cache(maxsize=1)
 def get_vectorstore() -> Chroma:
     settings = get_settings()
-    client = chromadb.PersistentClient(path=settings.chroma_persist_path)
+    client = chromadb.CloudClient(
+        api_key=settings.chroma_api_key,
+        tenant=settings.chroma_tenant,
+        database=settings.chroma_database,
+    )
     return Chroma(
         client=client,
         collection_name=COLLECTION_NAME,

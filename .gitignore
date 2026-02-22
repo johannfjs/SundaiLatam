@@ -27,6 +27,12 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 .cache
 *.tsbuildinfo
 
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
 # IntelliJ based IDEs
 .idea
 
