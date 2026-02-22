@@ -29,7 +29,7 @@ def build_rag_chain():
         temperature=0.3,
         streaming=True,
         api_key=settings.openai_api_key,
-        max_tokens=4096,
+        max_tokens=16000,
     )
 
     prompt = ChatPromptTemplate.from_messages([
